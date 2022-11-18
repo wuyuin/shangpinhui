@@ -8,6 +8,7 @@
     <FloorOne
       v-for="(floor, index) in floorlist"
       :key="floor.id"
+      :list="floor"
     />
 
     <Brand></Brand>

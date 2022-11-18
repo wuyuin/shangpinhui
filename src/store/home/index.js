@@ -15,6 +15,7 @@ const mutations ={
   },
   CATEBANNERLIST(state,bannerlist) {
     state.bannerlist=bannerlist
+   
   },
   CATEFLOORLIST(state,floorlist) {
     state.floorlist = floorlist
@@ -37,9 +38,11 @@ const actions = {
   async getBannerList({commit}) {
     //发送reqCateBannerList请求 模拟  结果是个对象
     let result = await reqCateBannerList()
+    console.log(result)
     if(result.code==200){
       //commit("mutations方法名",数据(发送到mutations的数据))
       commit("CATEBANNERLIST",result.data)
+     
       
     }
     

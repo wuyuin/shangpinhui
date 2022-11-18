@@ -195,6 +195,7 @@ export default {
 
       }
 
+
       //当你执行这个回调的时候，服务器的数据已经回来了bannerlist 而且循环也v-for 也已经结束了 也就是说结构渲染完毕DOM有了
       //而swiper必须在结构完全出来之后 才能new swiper实例
       //$nextTick：可以保证特面中的解构一定是有的，经常和各种插件一起使用（都需要DOM已经存在） 
