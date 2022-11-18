@@ -5,48 +5,17 @@
         <h3 class="fl">{{list.name}}</h3>
         <div class="fr">
           <ul class="nav-tabs clearfix">
-            <li class="active">
+            <li
+              class="active"
+              v-for="(nav,index) in list.navList"
+              :key="index"
+            >
               <a
                 href="#tab1"
                 data-toggle="tab"
-              >{{list.navList[0].text}}</a>
+              >{{nav.text}}</a>
             </li>
-            <li>
-              <a
-                href="#tab2"
-                data-toggle="tab"
-              >{{list.navList[1].text}}</a>
-            </li>
-            <li>
-              <a
-                href="#tab3"
-                data-toggle="tab"
-              >{{list.navList[2].text}}</a>
-            </li>
-            <li>
-              <a
-                href="#tab4"
-                data-toggle="tab"
-              >{{list.navList[3].text}}</a>
-            </li>
-            <li>
-              <a
-                href="#tab5"
-                data-toggle="tab"
-              >{{list.navList[4].text}}</a>
-            </li>
-            <li>
-              <a
-                href="#tab6"
-                data-toggle="tab"
-              >{{list.navList[5].text}}</a>
-            </li>
-            <li>
-              <a
-                href="#tab7"
-                data-toggle="tab"
-              >{{list.navList[6].text}}</a>
-            </li>
+
           </ul>
         </div>
       </div>
@@ -55,23 +24,26 @@
           <div class="floor-1">
             <div class="blockgary">
               <ul class="jd-list">
-                <li>{{list.keywords[0]}}</li>
-                <li>{{list.keywords[1]}}</li>
-                <li>{{list.keywords[2]}}</li>
-                <li>{{list.keywords[3]}}</li>
-                <li>{{list.keywords[4]}}</li>
-                <li>{{list.keywords[5]}}</li>
+                <li
+                  v-for="(keyword,index) in list.keywords"
+                  :key="index"
+                >{{keyword}}</li>
+
               </ul>
-              <img src=list.bigImg>
+              <img :src="list.imgUrl">
             </div>
             <div class="floorBanner">
               <div
                 class="swiper-container"
-                id="floor1Swiper"
+                ref="floor1Swiper"
               >
                 <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <img src=list.imgUrl>
+                  <div
+                    class="swiper-slide"
+                    v-for="(carouse ,index) in list.carouselList"
+                    :key="carouse.id"
+                  >
+                    <img :src="carouse.imgUrl">
                   </div>
                   <!--  <div class="swiper-slide">
                     <img src="./images/floor-1-b02.png">
@@ -91,22 +63,22 @@
             <div class="split">
               <span class="floor-x-line"></span>
               <div class="floor-conver-pit">
-                <img src="./images/floor-1-2.png" />
+                <img :src="list.recommendList[0]" />
               </div>
               <div class="floor-conver-pit">
-                <img src="./images/floor-1-3.png" />
+                <img :src="list.recommendList[1]" />
               </div>
             </div>
             <div class="split center">
-              <img src="./images/floor-1-4.png" />
+              <img :src="list.bigImg" />
             </div>
             <div class="split">
               <span class="floor-x-line"></span>
               <div class="floor-conver-pit">
-                <img src="./images/floor-1-5.png" />
+                <img :src="list.recommendList[2]" />
               </div>
               <div class="floor-conver-pit">
-                <img src="./images/floor-1-6.png" />
+                <img :src="list.recommendList[3]" />
               </div>
             </div>
           </div>
@@ -117,12 +89,36 @@
 </template>
 
 <script>
-
+import Swiper from "swiper"
 export default {
   name: "FloorOne",
   // 子组件接受父组件传过来的数据
   props: ["list"],
   mounted () {
+    //因为请求是父组件发的 数据由父组件传给子组件props  数据早已经加载完毕 结构也已经渲染了
+    var mySwiper = new Swiper(this.$refs.floor1Swiper, {
+      // direction: 'vertical', // 垂直切换选项
+      loop: true, // 循环模式选项
+
+      // 如果需要分页器
+      pagination: {
+        el: '.swiper-pagination',
+        //点击小球的时候也切换图片
+        clickable: true
+      },
+
+      // 如果需要前进后退按钮
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+
+      // 如果需要滚动条
+      /* scrollbar: {
+        el: '.swiper-scrollbar',
+      }, */
+    })
+
     //发请求
 
   },
